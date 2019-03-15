@@ -8,6 +8,7 @@ services:
     volumes:
       - ./data/db:/data/db
       - ./mongo/init/:/var/init
+      - ./mongo/mongod.conf/:/etc/mongod.conf
       - ./scripts/:/scripts
     links:
       - mongodb_1
@@ -25,6 +26,7 @@ services:
       - "$MONGO_PORT1:27017"
     volumes:
       - ./data/db1:/data/db
+      - ./mongo/mongod.conf/:/etc/mongod.conf
       - ./scripts/:/scripts
     entrypoint:
       - "./scripts/start.sh"
@@ -38,6 +40,7 @@ services:
       - "$MONGO_PORT2:27017"
     volumes:
       - ./data/db2:/data/db
+      - ./mongo/mongod.conf/:/etc/mongod.conf
       - ./scripts/:/scripts
     entrypoint:
       - "./scripts/start.sh"

@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "mongod start";
-mongod --smallfiles --replSet rs0 --bind_ip_all --fork --logpath /var/log/mongodb/mongod.log && sleep 5s && mongo --eval 'rs.initiate()';
+mongod --smallfiles --config /etc/mongod.conf && sleep 5s && mongo --eval 'rs.initiate()';
 echo "mongo initiate";
 mongo admin --eval 'rs.add({host: "mongodb_1:27017"})';
 mongo admin --eval 'rs.add({host: "mongodb_2:27017"})';

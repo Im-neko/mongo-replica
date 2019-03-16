@@ -10,5 +10,8 @@
 ## set env files 
 - `cp .env.example .env`
 
+## make keyFile
+- `sh ./makekey.sh`
+
 ## command
 - `docker-compose up -d`

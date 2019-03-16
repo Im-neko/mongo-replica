@@ -9,6 +9,7 @@ services:
       - ./data/db:/data/db
       - ./mongo/init/:/var/init
       - ./mongo/mongod.conf/:/etc/mongod.conf
+      - ./keys/:/var/keys
       - ./scripts/:/scripts
     links:
       - mongodb_1
@@ -27,6 +28,7 @@ services:
     volumes:
       - ./data/db1:/data/db
       - ./mongo/mongod.conf/:/etc/mongod.conf
+      - ./keys/:/var/keys
       - ./scripts/:/scripts
     entrypoint:
       - "./scripts/start.sh"
@@ -41,6 +43,7 @@ services:
     volumes:
       - ./data/db2:/data/db
       - ./mongo/mongod.conf/:/etc/mongod.conf
+      - ./keys/:/var/keys
       - ./scripts/:/scripts
     entrypoint:
       - "./scripts/start.sh"
@@ -52,5 +55,11 @@ services:
     container_name: mongodb_arbiter
     ports:
       - "$MONGO_PORT0:27017"
-    command: mongod --smallfiles --replSet rs0
+    volumes:
+      - ./mongo/mongod.conf/:/etc/mongod.conf
+      - ./keys/:/var/keys
+      - ./scripts/:/scripts
+    entrypoint:
+      - "./scripts/start.sh"
+    command: 02-secondary.sh
     restart: always
